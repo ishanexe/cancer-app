@@ -26,6 +26,7 @@ with st.form("input_form"):
 # Predict
 if submitted:
     try:
+        # Ensure the same feature names and order as during training
         input_data = pd.DataFrame([[
             age,
             1 if gender == "Male" else 0,
@@ -35,11 +36,7 @@ if submitted:
             activity,
             alcohol_intake,
             1 if cancer_history == "Yes" else 0
-        ]], columns=[
-            'Age', 'Gender', 'BMI', 'Smoking',
-            'GeneticRisk', 'PhysicalActivity',
-            'AlcoholIntake', 'CancerHistory'  # ✅ Corrected column name
-        ])
+        ]], columns=['Age', 'Gender', 'BMI', 'Smoking', 'GeneticRisk', 'PhysicalActivity', 'AlcoholIntake', 'CancerHistory'])
 
         # Scale and predict
         scaled_input = scaler.transform(input_data)
