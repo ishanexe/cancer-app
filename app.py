@@ -6,10 +6,9 @@ import joblib
 scaler = joblib.load("final_scaler.pkl")
 model = joblib.load("final_rf_model.pkl")
 
-# Set the page title and description
 st.set_page_config(page_title="Cancer Risk Predictor", layout="centered")
 st.title("🔬 Cancer Risk Predictor")
-st.write("Fill in the patient details below to assess cancer risk using a trained machine learning model.")
+st.write("Fill in the patient details below to assess cancer risk using a trained ML model.")
 
 # Input form
 with st.form("input_form"):
@@ -17,9 +16,9 @@ with st.form("input_form"):
     gender = st.selectbox("Gender", ["Male", "Female"])
     bmi = st.slider("BMI", 15.0, 45.0, 22.5)
     smoking = st.selectbox("Smoking", ["Yes", "No"])
-    genetic = st.selectbox("Genetic Disorder", ["Yes", "No"])
+    genetic_risk = st.selectbox("Genetic Risk", ["Yes", "No"])
     activity = st.slider("Physical Activity Level (1-10)", 1, 10, 5)
-    alcohol = st.slider("Alcohol Intake Level (1-10)", 1, 10, 5)
+    alcohol_intake = st.slider("Alcohol Intake Level (1-10)", 1, 10, 5)
     cancer_history = st.selectbox("Family History of Cancer", ["Yes", "No"])
 
     submitted = st.form_submit_button("Predict")
@@ -32,11 +31,11 @@ if submitted:
             1 if gender == "Male" else 0,
             bmi,
             1 if smoking == "Yes" else 0,
-            1 if genetic == "Yes" else 0,
+            1 if genetic_risk == "Yes" else 0,
             activity,
-            alcohol,
+            alcohol_intake,
             1 if cancer_history == "Yes" else 0
-        ]], columns=['Age', 'Gender', 'BMI', 'Smoking', 'GeneticDisorder', 'PhysicalActivity', 'Alcohol', 'CancerHistory'])
+        ]], columns=['Age', 'Gender', 'BMI', 'Smoking', 'GeneticRisk', 'PhysicalActivity', 'AlcoholIntake', 'CancerHistory'])
 
         # Scale and predict
         scaled_input = scaler.transform(input_data)
