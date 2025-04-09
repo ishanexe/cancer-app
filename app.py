@@ -38,12 +38,8 @@ if submitted:
         ]], columns=[
             'Age', 'Gender', 'BMI', 'Smoking',
             'GeneticRisk', 'PhysicalActivity',
-            'AlcoholIntake', 'FamilyHistory'
+            'AlcoholIntake', 'CancerHistory'  # ✅ Corrected column name
         ])
-
-        # Debug prints (optional)
-        # st.write("Input Columns:", input_data.columns.tolist())
-        # st.write("Input Data:", input_data)
 
         # Scale and predict
         scaled_input = scaler.transform(input_data)
@@ -53,13 +49,5 @@ if submitted:
             st.error("⚠️ High Risk of Cancer Detected")
         else:
             st.success("✅ Low Risk of Cancer Detected")
-
     except Exception as e:
         st.error(f"❌ Error during prediction: {str(e)}")
-
-
-
-
-# Temporarily print these
-st.write("Expected by Scaler:", list(scaler.feature_names_in_))
-st.write("Given to Model:", input_data.columns.tolist())
